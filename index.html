@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RobôZera Pro - Double</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ff0000, #000000);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 60px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    #previsao {
+      font-size: 1.8rem;
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #ff4444;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+
+    button:hover {
+      background-color: #cc0000;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 RobôZera Pro - Double</h1>
+  <div id="previsao">Carregando previsão...</div>
+  <button onclick="atualizar()">🔁 Atualizar Agora</button>
+
+  <script>
+    async function atualizar() {
+      const previsao = document.getElementById('previsao');
+      previsao.textContent = "Buscando nova previsão...";
+
+      try {
+        const res = await fetch('https://roboserver.zdevs.app/previsao');
+        const data = await res.json();
+        previsao.textContent = `🎯 Próxima cor: ${data.resultado.toUpperCase()}`;
+      } catch (error) {
+        previsao.textContent = 'Erro ao buscar previsão.';
+      }
+    }
+
+    atualizar(); // Carregar ao abrir
+  </script>
+</body>
+</html>
